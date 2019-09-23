@@ -1,0 +1,19 @@
+---
+- hosts: all
+  user: ubuntu
+  vars:
+    - homeDir: /home/ubuntu
+    - gitRepo: https://github.com/danialmalik/sails-js-chat-app.git
+    - repoDir: '{{homeDir}}/sailsJs'
+    - repoBranch: 'master'
+  # gather_facts: no
+  # environment:
+      # PATH: "/usr/bin/:{{ ansible_env.PATH }}"
+  tasks:
+    - name: clone and checkout branch
+      git:
+        repo: "{{ gitRepo }}"
+        dest: "{{ homeDir }}/test"
+        version: "{{ repoBranch }}"
+        force: yes
+        accept_hostkey: yes
